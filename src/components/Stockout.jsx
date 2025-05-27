@@ -46,9 +46,9 @@ export default function Stockout() {
     if (!form.inventory_id || !form.client_id) return;
     try {
       const [inv, cli, usage] = await Promise.all([
-        axios.get(`${BASE}/api/dashboard/inventory/${form.inventory_id}`),
-        axios.get(`${BASE}/api/dashboard/clients/${form.client_id}`),
-        axios.get(`${BASE}/api/dashboard/usage`, {
+        axios.get(`/api/dashboard/inventory/${form.inventory_id}`),
+        axios.get(`/api/dashboard/clients/${form.client_id}`),
+        axios.get(`/api/dashboard/usage`, {
           params: {
             user_id: user.id,
             client_id: form.client_id,
