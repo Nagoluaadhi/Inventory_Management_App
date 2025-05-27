@@ -4,9 +4,5 @@
       "source": "/api/(.*)",
       "destination": "http://43.204.112.199:3001/api/$1"
     },
-    {
-      "source": "/login",
-      "destination": "http://43.204.112.199:3001/login"
-    }
   ]
 }
