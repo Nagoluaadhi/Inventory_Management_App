@@ -55,6 +55,7 @@ const loadInventory = async () => {
     e.preventDefault();
     await axios.post('/api/inventory', inventoryForm);
     setInventoryForm({ item_name: '', model_no: '', remark: '' });
+    loadInventory();
   };
 
   const handleClientSubmit = async (e) => {
