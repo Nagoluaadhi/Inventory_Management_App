@@ -5,7 +5,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import BarcodeScanner from './BarcodeScanner';
 
-export default function Outward() {
+export default function Stockout() {
   const [form, setForm] = useState({
     date: '',
     inventory_id: '',
@@ -32,7 +32,7 @@ export default function Outward() {
       const [invRes, cliRes, stockRes] = await Promise.all([
         axios.get('/api/inventory'),
         axios.get('/api/clients'),
-        axios.get('/api/stock/outward')
+        axios.get('/api/stockout')
       ]);
       setInventory(invRes.data);
       setClients(cliRes.data);
@@ -98,7 +98,7 @@ export default function Outward() {
   }
 
   try {
-    await axios.post('/api/stock/stockout', {
+    await axios.post('/api/stockout', {
       ...form,
       user_id: user.id
     });
@@ -134,10 +134,10 @@ export default function Outward() {
     setScannerVisible(false);
   };
 
-  const deleteOutward = async (id) => {
+  const deletestockout = async (id) => {
     if (!window.confirm('Are you sure you want to delete this Outward entry?')) return;
     try {
-      await axios.delete(`/api/stock/outward/${id}`);
+      await axios.delete(`/api/stockout/${id}`);
       loadDropdowns();
     } catch (err) {
       console.error(err);
@@ -211,7 +211,7 @@ export default function Outward() {
         <button onClick={exportPDF} className="bg-red-500 text-white px-4 py-1 rounded">Export PDF</button>
       </div>
 
-      <div id="outward-table">
+      <div id="stockout-table">
         <table className="w-full border text-sm">
           <thead className="bg-gray-100">
             <tr>
@@ -240,7 +240,7 @@ export default function Outward() {
       <td className="border px-2">{new Date(row.date).toLocaleDateString()}</td>
       <td className="border px-2">
         <button
-          onClick={() => deleteOutward(row.id)}
+          onClick={() => deletestockout(row.id)}
           className="bg-red-600 text-white px-2 py-1 text-xs rounded"
         >
           Delete
