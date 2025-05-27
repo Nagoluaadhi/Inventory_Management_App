@@ -134,7 +134,7 @@ export default function Stockout() {
     setScannerVisible(false);
   };
 
-  const deletestockout = async (id) => {
+  const deleteStockout = async (id) => {
     if (!window.confirm('Are you sure you want to delete this Outward entry?')) return;
     try {
       await axios.delete(`/api/stockout/${id}`);
@@ -146,7 +146,7 @@ export default function Stockout() {
   };
 
   const exportPDF = () => {
-    const input = document.getElementById('outward-table');
+    const input = document.getElementById('stockout-table');
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
@@ -240,7 +240,7 @@ export default function Stockout() {
       <td className="border px-2">{new Date(row.date).toLocaleDateString()}</td>
       <td className="border px-2">
         <button
-          onClick={() => deletestockout(row.id)}
+          onClick={() => deleteStockout(row.id)}
           className="bg-red-600 text-white px-2 py-1 text-xs rounded"
         >
           Delete
@@ -250,9 +250,9 @@ export default function Stockout() {
   ))
 ))}
 
-          </tbody>
-        </table>
-      </div>
-    </div>
+</tbody>
+</table>
+</div>
+</div>
   );
 }
