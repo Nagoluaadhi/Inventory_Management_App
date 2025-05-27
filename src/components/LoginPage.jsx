@@ -10,7 +10,7 @@ function LoginPage({ setUser }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('/login', { username, password, role });
+      const res = await axios.post('api/login', { username, password, role });
       localStorage.setItem('user', JSON.stringify(res.data));
       setUser(res.data);
 
