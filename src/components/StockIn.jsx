@@ -31,7 +31,7 @@ export default function StockIn() {
       const [invRes, cliRes, stockRes] = await Promise.all([
         axios.get('/api/inventory'),
         axios.get('/api/clients'),
-        axios.get('/api/stockin')
+        axios.get('/api/stock/stockin')
       ]);
       setInventory(invRes.data);
       setClients(cliRes.data);
@@ -85,7 +85,7 @@ export default function StockIn() {
     }
 
     try {
-      await axios.post('/api/stockin', {
+      await axios.post('/api/stock/stockin', {
         ...finalForm,
         user_id: user.id
       });
@@ -112,7 +112,7 @@ export default function StockIn() {
   const deleteStockIn = async (id) => {
     if (!window.confirm('Are you sure you want to delete this stock entry?')) return;
     try {
-      await axios.delete(`/api/stockin/${id}`);
+      await axios.delete(`/api/stock/stockin/${id}`);
       loadDropdowns();
     } catch (err) {
       console.error(err);
