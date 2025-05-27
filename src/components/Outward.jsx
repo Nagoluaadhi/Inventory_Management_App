@@ -32,7 +32,7 @@ export default function Outward() {
       const [invRes, cliRes, stockRes] = await Promise.all([
         axios.get('/api/inventory'),
         axios.get('/api/clients'),
-        axios.get('/api/outward')
+        axios.get('/api/stock/outward')
       ]);
       setInventory(invRes.data);
       setClients(cliRes.data);
@@ -98,7 +98,7 @@ export default function Outward() {
   }
 
   try {
-    await axios.post('/api/stockout', {
+    await axios.post('/api/stock/stockout', {
       ...form,
       user_id: user.id
     });
@@ -137,7 +137,7 @@ export default function Outward() {
   const deleteOutward = async (id) => {
     if (!window.confirm('Are you sure you want to delete this Outward entry?')) return;
     try {
-      await axios.delete(`/api/outward/${id}`);
+      await axios.delete(`/api/stock/outward/${id}`);
       loadDropdowns();
     } catch (err) {
       console.error(err);
