@@ -27,20 +27,25 @@ export default function Stockout() {
 
   const user = JSON.parse(localStorage.getItem('user'));
   const loadDropdowns = async () => {
-    try {
-      const [invRes, cliRes, stockRes] = await Promise.all([
-        axios.get('/api/inventory'),
-        axios.get('/api/clients'),
-        axios.get('/api/stockout')
+  try {
+    const [invRes, cliRes, stockRes] = await Promise.all([
+      axios.get('/api/inventory'),
+      axios.get('/api/clients'),
+      axios.get('/api/stockout')
+    ]);
 
-      ]);
-      setInventory(invRes.data);
-      setClients(cliRes.data);
-      setData(stockRes.data);
-    } catch (err) {
-      console.error('Dropdown loading failed:', err);
-    }
-  };
+    console.log('Inventory response:', invRes.data);
+    console.log('Clients response:', cliRes.data);
+    console.log('Stockout response:', stockRes.data);
+
+    if (Array.isArray(invRes.data)) setInventory(invRes.data);
+    if (Array.isArray(cliRes.data)) setClients(cliRes.data);
+    if (Array.isArray(stockRes.data)) setData(stockRes.data);
+  } catch (err) {
+    console.error('Dropdown loading failed:', err);
+  }
+};
+
 
   const loadBalances = async () => {
     if (!form.inventory_id || !form.client_id) return;
