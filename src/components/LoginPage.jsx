@@ -10,11 +10,7 @@ function LoginPage({ setUser }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://43.204.112.199:3001/login', {
-        username,
-        password,
-        role
-      });
+      const res = await axios.post('http://43.204.112.199:3001/login', { username, password, role });
       localStorage.setItem('user', JSON.stringify(res.data));
       setUser(res.data);
 
