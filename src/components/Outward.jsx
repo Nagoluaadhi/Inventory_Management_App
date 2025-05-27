@@ -30,9 +30,10 @@ export default function Stockout() {
   const loadDropdowns = async () => {
     try {
       const [invRes, cliRes, stockRes] = await Promise.all([
-        axios.get('${BASE}/api/inventory'),
-        axios.get('${BASE}/api/clients'),
-        axios.get('${BASE}/api/stockout')
+        axios.get(`${BASE}/api/inventory`),
+        axios.get(`${BASE}/api/clients`),
+        axios.get(`${BASE}/api/stockout`)
+
       ]);
       setInventory(invRes.data);
       setClients(cliRes.data);
@@ -98,7 +99,7 @@ export default function Stockout() {
   }
 
   try {
-    await axios.post('${BASE}/api/stockout', {
+    await axios.post(`${BASE}/api/stockout`, {
       ...form,
       user_id: user.id
     });
