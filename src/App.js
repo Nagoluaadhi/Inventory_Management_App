@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import StockIn from './components/StockIn';
-import Outward from './components/Outward';
+import Outward from './components/Stockout';
 import Services from './components/Services';
 import Report from './components/Report';
 import LoginPage from './components/LoginPage';
