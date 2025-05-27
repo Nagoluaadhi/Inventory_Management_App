@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import StockIn from './components/StockIn';
-import Outward from './components/Stockout';
+import Stockout from './components/Stockout';
 import Services from './components/Services';
 import Report from './components/Report';
 import LoginPage from './components/LoginPage';
@@ -37,7 +37,7 @@ function App() {
             <>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="stockin" element={<StockIn />} />
-              <Route path="outward" element={<Outward />} />
+              <Route path="stockout" element={<Stockout />} />
               <Route path="services" element={<Services />} />
               <Route path="report" element={<Report />} />
               <Route path="clients" element={<Clients />} />
@@ -47,21 +47,21 @@ function App() {
 
           {user?.role === 'supervisor' && (
             <>
-              <Route path="outward" element={<Outward />} />
+              <Route path="stockout" element={<Stockout />} />
               <Route path="report" element={<Report />} />
             </>
           )}
 
           {user?.role === 'user' && (
             <>
-              <Route path="outward" element={<Outward />} />
+              <Route path="stockout" element={<Stockout />} />
               <Route path="services" element={<Services />} />
               <Route path="report" element={<Report />} />
             </>
           )}
 
           {/* Fallback inside /app */}
-          <Route path="*" element={<Navigate to="/app/outward" />} />
+          <Route path="*" element={<Navigate to="/app/stockout" />} />
         </Route>
 
         {/* Fallback for non-matching routes */}
