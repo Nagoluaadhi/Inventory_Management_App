@@ -26,13 +26,12 @@ export default function Stockout() {
   const [userUsageQty, setUserUsageQty] = useState(null);
 
   const user = JSON.parse(localStorage.getItem('user'));
-  const BASE = 'http://43.204.112.199:3001';
   const loadDropdowns = async () => {
     try {
       const [invRes, cliRes, stockRes] = await Promise.all([
-        axios.get(`${BASE}/api/inventory`),
-        axios.get(`${BASE}/api/clients`),
-        axios.get(`${BASE}/api/stockout`)
+        axios.get('/api/inventory'),
+        axios.get('/api/clients'),
+        axios.get('/api/stockout')
 
       ]);
       setInventory(invRes.data);
@@ -99,7 +98,7 @@ export default function Stockout() {
   }
 
   try {
-    await axios.post(`${BASE}/api/stockout`, {
+    await axios.post('/api/stockout', {
       ...form,
       user_id: user.id
     });
@@ -138,7 +137,7 @@ export default function Stockout() {
   const deleteStockout = async (id) => {
     if (!window.confirm('Are you sure you want to delete this Outward entry?')) return;
     try {
-      await axios.delete(`${BASE}/api/stockout/${id}`);
+      await axios.delete(`/api/stockout/${id}`);
       loadDropdowns();
     } catch (err) {
       console.error(err);
